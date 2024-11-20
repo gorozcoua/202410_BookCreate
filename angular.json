@@ -24,7 +24,7 @@
             "baseHref": ""
           }
         }
-      }, 
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -48,7 +48,9 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -57,10 +59,12 @@
           },
           "configurations": {
             "es": {
-              "localize": ["es"],
+              "localize": [
+                "es"
+              ],
               "outputPath": "dist/book-detail-es/",
               "i18nMissingTranslation": "error"
-            },          
+            },
             "production": {
               "budgets": [
                 {
@@ -95,7 +99,7 @@
           "configurations": {
             "es": {
               "buildTarget": "book-detail:build:es"
-            }, 
+            },
             "production": {
               "buildTarget": "book-detail:build:production"
             },
@@ -128,11 +132,60 @@
             ],
             "scripts": []
           }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "book-detail:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "book-detail:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "book-detail:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "book-detail:serve:development"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "book-detail:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "book-detail:serve:production"
+            }
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "fe86c683-13a1-4b80-8329-485836da2ba3"
+    "analytics": "fe86c683-13a1-4b80-8329-485836da2ba3",
+    "schematicCollections": [
+      "@cypress/schematic",
+      "@schematics/angular"
+    ]
   }
 }
